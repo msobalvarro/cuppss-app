@@ -38,12 +38,8 @@ export const Index = create<DefaultStylesIndex>({
 
     /**Styles logo image */
     imageLogo: {
-        borderColor: "#CCC",
-        borderWidth: 2,
         height: RFPercentage(40),
         width: RFPercentage(40),
-        resizeMode: 'cover',
-        borderRadius: 20,
     },
 
     containerButtons: {
@@ -56,10 +52,8 @@ export const Index = create<DefaultStylesIndex>({
     /**Buttons style */
     buttons: {
         backgroundColor: '#34495e',
-        borderRadius: 3,
-        elevation: 5,
+        borderColor: 'transparent',
         marginVertical: 10,
-        padding: RFValue(8),
         width: '70%',
     },
 

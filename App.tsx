@@ -2,34 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Index from './views/Index/Index'
-// import {  } from 'expo'
-
-interface DefaultProps { }
-
-interface DefautlState {
-    name: string
-}
-
-class App extends Component<DefaultProps, DefautlState> {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>ROY SE LA COME ENTERA</Text>
-            </View>
-        )
-    }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        fontSize: 50,
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
-
+import Login from './views/Login/Login'
 
 const AppNavigation = createStackNavigator(
     {
@@ -37,7 +10,7 @@ const AppNavigation = createStackNavigator(
             screen: Index,            
         },
         Login: {
-            screen: App
+            screen: Login
         }
     },
     {
