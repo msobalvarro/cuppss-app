@@ -1,14 +1,19 @@
-import React from 'react'
-import { View, Image } from 'react-native'
+import React, { Component } from 'react'
+import { View, Image, Text, SafeAreaView, Platform } from 'react-native'
 // import imgLogo from '../../assets/logo.png'
 
 /**
  * Selection view of **Hostelers** and **distributors**
  */
-const Index = () => (
-    <View>
-        <Image source={require('../../assets/logo.png')} />
-    </View>
-)
+class Index extends Component {
+    render() {
+        return (
+            <SafeAreaView style={{ paddingTop: (Platform.OS === 'android') ? 50 : 0 }}>
+                <Image style={{ width: 150, height: 150 }} source={require('../../assets/logo/logo.png')} />
+                <Text>Test</Text>
+            </SafeAreaView>
+        )
+    }
+}
 
 export default Index

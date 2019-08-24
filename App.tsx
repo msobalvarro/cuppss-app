@@ -35,15 +35,14 @@ const AppNavigation = createStackNavigator(
     {
         Home: {
             screen: Index,            
+        },
+        Login: {
+            screen: App
         }
     },
     {
-        initialRouteKey: "Index",
-        headerMode: "screen",
-        navigationOptions: {
-            headerTitle: 'Hello',
-            headerTintColor: '#CCC'
-        }
+        initialRouteName: "Home",
+        headerMode: "none"
     }
 )
 
