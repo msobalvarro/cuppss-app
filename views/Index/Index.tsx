@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Text, SafeAreaView, View} from 'react-native'
+import { Image, Text, SafeAreaView, View, StatusBar} from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from "react-navigation"
 import { Button } from '@ant-design/react-native'
 import { Index as styles } from '../styles'
@@ -18,6 +18,9 @@ class Index extends Component<NavigationScreenProps<NavigationState, NavigationP
     render() {
         return (
             <SafeAreaView style={styles.main}>
+                
+                <StatusBar hidden={true} />
+
                 <Image style={styles.imageLogo} resizeMode="contain" source={require('../../assets/logo/logo.png')} />
                 
                 <View style={styles.containerButtons}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View, CheckBox, Image } from 'react-native'
+import { SafeAreaView, Text, View, CheckBox, Image, StatusBar } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
 import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
@@ -44,6 +44,9 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
     render() {
         return (
             <SafeAreaView style={styles.main}>
+                
+                <StatusBar hidden={true} />
+
                 <Image style={styles.imageLogo} resizeMode="contain" source={require('../../assets/logo/logo.png')} />
                 <Text style={styles.textMain}>Login</Text>
 

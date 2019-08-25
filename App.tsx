@@ -1,21 +1,18 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Index from './views/Index/Index'
 import Login from './views/Login/Login'
+import MenuHostelier from './views/Hotelier/Menu/Menu';
 
 const AppNavigation = createStackNavigator(
     {
-        Home: {
-            screen: Index,            
-        },
-        Login: {
-            screen: Login
-        }
+        Index,
+        Login,
+        MenuHostelier,
     },
     {
-        initialRouteName: "Home",
-        headerMode: "none"
+        initialRouteName: "MenuHostelier",
+        headerMode: "none",
+        
     }
 )
 

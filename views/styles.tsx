@@ -1,11 +1,11 @@
-import { StyleSheet, ViewStyle, ImageStyle, Platform, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Dimensions } from 'react-native'
 
 const { create } = StyleSheet
 
 /**Dimension screen app */
-const { width, height } = Dimensions.get("screen")
+export const { width, height } = Dimensions.get("screen")
 
 /**Return size **%** width screen app */
 const screenWidth = (e: number): number => {
@@ -29,7 +29,7 @@ interface DefaultStylesIndex {
 export const Index = create<DefaultStylesIndex>({
     /**Style main container */
     main: {
-        paddingTop: (Platform.OS === 'android') ? 50 : 0,
+        // paddingTop: (Platform.OS === 'android') ? 50 : 0,
         justifyContent: 'center',
         alignItems: 'center',
         width,
@@ -80,7 +80,7 @@ interface DefaultStyleLogin {
 export const Login = create<DefaultStyleLogin>({
     /**Style main container */
     main: {
-        paddingTop: (Platform.OS === 'android') ? 50 : 0,
+        // paddingTop: (Platform.OS === 'android') ? 50 : 0,
         justifyContent: 'flex-start',
         alignItems: 'center',
         width,
@@ -124,4 +124,19 @@ export const Login = create<DefaultStyleLogin>({
         flexDirection: 'row',
     }
 
+})
+
+interface DefaultStyleMenuHostelier {
+    container?: ViewStyle,
+}
+
+export const MenuHostelier = create<DefaultStyleMenuHostelier>({
+    container: {
+        // flexDirection: 'row',
+        // flex: 1,
+        // flexWrap: 'nowrap',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        width: '100%',
+    },
 })
