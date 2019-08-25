@@ -60,7 +60,7 @@ export const Index = create<DefaultStylesIndex>({
     /**Text buttons styles */
     textButton: {
         color: '#FFF',
-        fontSize: RFValue(24),
+        // fontSize: RFValue(24),
         textAlign: 'center',
     }
 })
@@ -115,7 +115,7 @@ export const Login = create<DefaultStyleLogin>({
     containerCheck: {
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        marginVertical: RFValue(10),
+        marginVertical: RFValue(20),
     },
 
     /**Row checkbox and text of checkbox */

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View, TextInputChangeEventData, NativeSyntheticEvent, CheckBox, Image } from 'react-native'
+import { SafeAreaView, Text, View, CheckBox, Image } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
 import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
-import { Button } from '@ant-design/react-native';
+import { Button, WhiteSpace } from '@ant-design/react-native';
 
 interface StateTypes {
     email: string,
@@ -34,6 +34,11 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
     /**Checked true/false remember */
     onHandledChangeRemember = () => {
         this.setState({ remember: !this.state.remember })
+    }
+
+    /**Return to view Index select type user */
+    returnToindex = () => {
+        this.props.navigation.pop()
     }
 
     render() {
@@ -79,7 +84,9 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
                         </View>
                     </View>
 
-                    <Button type="ghost">Iniciar Sesion</Button>
+                    <Button type="warning">Iniciar Sesion</Button>
+                    <WhiteSpace />
+                    <Button onPress={this.returnToindex} type="ghost">Volver a Inicio</Button>
                 </View>
 
             </SafeAreaView>
