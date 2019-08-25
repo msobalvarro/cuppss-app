@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const { create } = StyleSheet
-const sizeIcon = RFValue(50)
+const sizeIcon = RFValue(100)
 
 interface DefaultPropsItem {
     imageSource: ImageSourcePropType,
@@ -23,8 +23,10 @@ const styles = create<DefaultStyle>({
         alignItems: 'center',
         borderWidth: 2,
         borderColor: '#CCC',
-        padding: RFValue(10),
+        borderRadius: 5,
+        padding: RFValue(25),
         flexDirection: 'column',
+        margin: RFValue(25),
         // width: '40%',
     },
 
@@ -33,10 +35,15 @@ const styles = create<DefaultStyle>({
         height: sizeIcon,
         width: sizeIcon,
     },
+
+    textTitle: {
+        fontSize: RFValue(18),
+        marginTop: 20,
+    },
 })
 
 const MenuItem = (props: DefaultPropsItem & TouchableOpacityProps) => (
-    <TouchableOpacity style={[styles.container, props.style]} {...props}>
+    <TouchableOpacity style={styles.container} {...props}>
         <Image style={styles.imageIcon} source={props.imageSource} />
 
         <Text style={styles.textTitle}>

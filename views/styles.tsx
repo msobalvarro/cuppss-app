@@ -128,6 +128,8 @@ export const Login = create<DefaultStyleLogin>({
 
 interface DefaultStyleMenuHostelier {
     container?: ViewStyle,
+    rowItem?: ViewStyle,
+    items?: ViewStyle,
 }
 
 export const MenuHostelier = create<DefaultStyleMenuHostelier>({
@@ -137,6 +139,19 @@ export const MenuHostelier = create<DefaultStyleMenuHostelier>({
         // flexWrap: 'nowrap',
         // alignItems: 'center',
         // justifyContent: 'center',
+        marginTop: RFValue(20),
         width: '100%',
+    },
+
+    rowItem: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        // marginTop: RFValue(10),
+        width: '100%',
+    },
+
+    items: {
+        marginHorizontal: RFValue(10),
     },
 })
