@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Text, SafeAreaView, TouchableOpacity, View} from 'react-native'
+import { Image, Text, SafeAreaView, View} from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from "react-navigation"
 import { Button } from '@ant-design/react-native'
 import { Index as styles } from '../styles'

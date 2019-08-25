@@ -1,13 +1,31 @@
 import React from 'react'
-import { TextInput, TextInputProps } from 'react-native'
+import { TextInput, TextInputProps, StyleSheet, TextStyle } from 'react-native'
+import { RFValue } from 'react-native-responsive-fontsize';
 
-interface Styles {
+const { create } = StyleSheet
 
+interface StylesDefault {
+    input: TextStyle
 }
 
-const Input = (props:TextInputProps) => {
+interface InputProps {
+    innerStyle?: TextStyle
+}
+
+const styles = create<StylesDefault>({
+    input: {
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#CCC',
+        fontSize: RFValue(16),
+        padding: 8,
+        width: '100%',
+    }
+})
+
+const Input = (props: TextInputProps & InputProps) => {
     return (
-        <TextInput {...props} />
+        <TextInput style={[styles.input, props.innerStyle]} {...props} />
     )
 }
 

@@ -8,12 +8,12 @@ const { create } = StyleSheet
 const { width, height } = Dimensions.get("screen")
 
 /**Return size **%** width screen app */
-const screenWidth = (e:number): number => {
+const screenWidth = (e: number): number => {
     return Number(width * Number(`0.${e}`))
 }
 
 /**Return size **%** height screen app */
-const screenHeight = (e:number): number => {
+const screenHeight = (e: number): number => {
     return Number(height * Number(`0.${e}`))
 }
 
@@ -60,7 +60,68 @@ export const Index = create<DefaultStylesIndex>({
     /**Text buttons styles */
     textButton: {
         color: '#FFF',
-        fontSize: RFValue(24),        
+        fontSize: RFValue(24),
         textAlign: 'center',
     }
+})
+
+interface DefaultStyleLogin {
+    main: ViewStyle,
+    textMain?: TextStyle,
+    imageLogo?: ImageStyle,
+    containerForm?: ViewStyle,
+    inputs?: TextStyle,
+    containerCheck?: ViewStyle
+    rowCheck?: ViewStyle,
+    textCheck?: ViewStyle
+
+}
+
+export const Login = create<DefaultStyleLogin>({
+    /**Style main container */
+    main: {
+        paddingTop: (Platform.OS === 'android') ? 50 : 0,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width,
+        height,
+    },
+
+    /**Styles logo image */
+    imageLogo: {
+        height: RFPercentage(30),
+        width: RFPercentage(40),
+    },
+
+    /**Text title login */
+    textMain: {
+        color: '#2D2D2D',
+        fontSize: RFValue(18),
+        marginVertical: RFValue(20),
+    },
+
+    /**Container Form */
+    containerForm: {
+        flexDirection: 'column',
+        paddingHorizontal: RFPercentage(5),
+        width: '100%',
+    },
+
+    inputs: {
+        marginVertical: RFValue(2),
+    },
+
+    /**Container Check */
+    containerCheck: {
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+        marginVertical: RFValue(10),
+    },
+
+    /**Row checkbox and text of checkbox */
+    rowCheck: {
+        alignItems: 'center',
+        flexDirection: 'row',
+    }
+
 })
