@@ -155,3 +155,61 @@ export const MenuHostelier = create<DefaultStyleMenuHostelier>({
         marginHorizontal: RFValue(10),
     },
 })
+
+interface DefaultStyleProdcutsHostelier {
+    container: ViewStyle,
+    itemProduct?: ViewStyle,
+    // imageProduct?: ImageStyle,
+    Search?: TextStyle,
+    imageProduct?: ViewStyle,
+    itemContainerText?: TextStyle,
+    itemTitle?: TextStyle,
+    itemDescription?: TextStyle,
+
+}
+
+export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
+    /**Container of all products */
+    container: {
+        flexDirection: 'column',
+        // marginTop: RFValue(10),
+        width: '100%',
+    },
+
+    Search: {
+        marginVertical: RFValue(25),
+        paddingHorizontal: RFValue(15),
+    },
+
+    /**Styles item product */
+    itemProduct: {      
+        borderTopWidth: 2,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        padding: RFValue(10),  
+    },
+
+    imageProduct: {
+        backgroundColor: '#CCC',
+        borderRadius: 5,
+        height:128,
+        marginRight: RFValue(5),
+        width: 128,
+    },
+
+    itemContainerText: {
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+    },
+
+    itemTitle: {
+        color: '#34495e',
+        fontSize: RFValue(22),
+    },
+
+    itemDescription: {
+        color: '#7f8c8d',
+        fontSize: RFValue(14),
+        width: '85%',
+    },
+})
