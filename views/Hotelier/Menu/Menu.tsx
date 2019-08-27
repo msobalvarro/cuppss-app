@@ -12,13 +12,21 @@ const MenuHostelier = (props: NavigationScreenProps<NavigationState, NavigationP
 
         <ScrollView style={styles.container}>
             <View style={styles.rowItem}>
-                <MenuItem imageSource={require('../../../assets/icons-menu/hotelier/cheers.png')} text="Destilados" />
-                <MenuItem imageSource={require('../../../assets/icons-menu/hotelier/wine.png')} text="Vinos" />
+                <MenuItem onPress={() => props.navigation.navigate({ routeName: 'Products' })}
+                    imageSource={require('../../../assets/icons-menu/hotelier/cheers.png')}
+                    text="Destilados" />
+                <MenuItem
+                    imageSource={require('../../../assets/icons-menu/hotelier/wine.png')}
+                    text="Vinos" />
             </View>
 
             <View style={styles.rowItem}>
-                <MenuItem imageSource={require('../../../assets/icons-menu/hotelier/water.png')} text="Agua" />
-                <MenuItem imageSource={require('../../../assets/icons-menu/hotelier/fruit.png')} text="Zumos" />
+                <MenuItem
+                    imageSource={require('../../../assets/icons-menu/hotelier/water.png')}
+                    text="Agua" />
+                <MenuItem
+                    imageSource={require('../../../assets/icons-menu/hotelier/fruit.png')}
+                    text="Zumos" />
             </View>
         </ScrollView>
     </SafeAreaView>

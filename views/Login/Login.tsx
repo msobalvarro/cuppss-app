@@ -87,7 +87,9 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
                         </View>
                     </View>
 
-                    <Button type="warning">Iniciar Sesion</Button>
+                    <Button type="warning" onPress={
+                        () => this.props.navigation.navigate({ routeName: 'MenuHostelier' })
+                    }>Iniciar Sesion</Button>
                     <WhiteSpace />
                     <Button onPress={this.returnToindex} type="ghost">Volver a Inicio</Button>
                 </View>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, StatusBar, TouchableOpacity, View } from 'react-native'
-import { StackActions } from 'react-navigation'
+import { StackActions, NavigationActions } from 'react-navigation'
 import { RFValue } from 'react-native-responsive-fontsize'
 
 const { create } = StyleSheet
@@ -69,13 +69,16 @@ class HeaderApp extends Component<DefaultProps, DefaultState> {
 
         // NavigationActions.init()
 
-        StackActions.popToTop({ immediate: true })
+        // StackActions.popToTop({ immediate: true })
+        // StackActions.
     }
 
     /**Back a screen */
     redirectBack = () => {
         // this.props.navigation.pop()
-        StackActions.pop({ immediate: true, n: 1 })
+        // StackActions.pop({ n: 1 })
+        // StackActions.pop({  })
+        // NavigationActions.
     }
 
     render() {

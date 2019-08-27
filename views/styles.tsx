@@ -160,7 +160,7 @@ interface DefaultStyleProdcutsHostelier {
     container: ViewStyle,
     itemProduct?: ViewStyle,
     // imageProduct?: ImageStyle,
-    Search?: TextStyle,
+    search?: TextStyle,
     imageProduct?: ViewStyle,
     itemContainerText?: TextStyle,
     itemTitle?: TextStyle,
@@ -171,14 +171,18 @@ interface DefaultStyleProdcutsHostelier {
 export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
     /**Container of all products */
     container: {
+        alignItems: 'center',
         flexDirection: 'column',
         // marginTop: RFValue(10),
+        justifyContent: 'center',
         width: '100%',
     },
 
-    Search: {
+    search: {
+        // backgroundColor: '#EEE',
         marginVertical: RFValue(25),
-        paddingHorizontal: RFValue(15),
+        marginHorizontal: RFValue(15),
+        width: 'auto',
     },
 
     /**Styles item product */
@@ -187,6 +191,7 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         padding: RFValue(10),  
+        width:'100%',
     },
 
     imageProduct: {

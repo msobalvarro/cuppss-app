@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Text, ImageSourcePropType, StyleSheet, ViewStyle, ImageStyle, TextStyle, TouchableOpacityProps } from 'react-native'
+import { Image, Text, ImageSourcePropType, StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -9,7 +9,7 @@ const sizeIcon = RFValue(100)
 interface DefaultPropsItem {
     imageSource: ImageSourcePropType,
     text: string,
-    onPress?: void
+    onPress?: () => void
 }
 
 interface DefaultStyle {
@@ -42,8 +42,8 @@ const styles = create<DefaultStyle>({
     },
 })
 
-const MenuItem = (props: DefaultPropsItem & TouchableOpacityProps) => (
-    <TouchableOpacity style={styles.container} {...props}>
+const MenuItem = (props: DefaultPropsItem) => (
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
         <Image style={styles.imageIcon} source={props.imageSource} />
 
         <Text style={styles.textTitle}>

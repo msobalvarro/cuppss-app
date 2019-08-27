@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { SafeAreaView, View, Image, Text, TouchableOpacity } from 'react-native'
-import { NavigationScreenProps, NavigationState, NavigationParams, ScrollView } from 'react-navigation'
+import { SafeAreaView, View, Image, Text, TouchableOpacity, Keyboard, ScrollView } from 'react-native'
+import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
 import HeaderApp from '../../../components/Header/Header'
 import { ProductsHostelier as styles } from '../../styles'
 import dataProducts from './products.json'
@@ -46,22 +46,25 @@ class Products extends Component<NavigationScreenProps<NavigationState, Navigati
 
         const { name } = props
 
-        if(name.length > 0 && name.toLowerCase().search(this.state.filter) > -1) {
+        if (name.length > 0 && name.toLowerCase().search(this.state.filter) > -1) {
             return (
-                <TouchableOpacity style={[styles.itemProduct, {
-                    borderTopColor: (index === 0) ? 'transparent' : '#CCC',
-                }]} key={index}>
+                <TouchableOpacity 
+                    onPress={
+                        () => this.props.navigation.navigate({ routeName: 'BrandsProduct', params: props })
+                    }
+                    style={[styles.itemProduct, {borderTopColor: (index === 0) ? 'transparent' : '#CCC' }]} 
+                    key={index}>
                     {/* <Image
                         style={styles.imageProduct}
                         source={{ uri: avatar.getUrlImage(index) }} /> */}
-    
+
                     <View style={styles.imageProduct} />
-    
+
                     <View style={styles.itemContainerText}>
                         <Text style={styles.itemTitle}>
                             {name}
                         </Text>
-    
+
                         <Text style={styles.itemDescription}>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         </Text>
@@ -75,17 +78,21 @@ class Products extends Component<NavigationScreenProps<NavigationState, Navigati
     render() {
         return (
             <SafeAreaView>
-                <HeaderApp title="Listado de productos" />
+                <ScrollView>
 
-                <Input
-                    onChangeText={(filter: string) => this.setState({ filter })}
-                    style={styles.Search}
-                    placeholder="Buscar producto" />
+                    <HeaderApp title="Listado de productos" />
 
-                <ScrollView keyboardDismissMode="on-drag" style={styles.container}>
-                    {
-                        this.state.products.map(this.Item)
-                    }
+                    <Input
+                        onBlur={Keyboard.dismiss}
+                        onChangeText={(filter: string) => this.setState({ filter })}
+                        innerStyle={styles.search}
+                        placeholder="Buscar producto" />
+
+                    <View style={styles.container}>
+                        {
+                            this.state.products.map(this.Item)
+                        }
+                    </View>
                 </ScrollView>
             </SafeAreaView>
         )
