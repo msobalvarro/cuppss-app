@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
+import { NavigationScreenProps } from 'react-navigation'
 import { SafeAreaView, View, ScrollView, Text } from 'react-native'
 import HeaderApp from '../../../components/Header/Header';
 import { Toast } from '@ant-design/react-native';
 
 interface dataProps {
     name?: string
-    products: ObjectArray
+    products?: ObjectArray
 }
 
 interface DefaultState {
     data: dataProps
 }
 
-class BrandsProducts extends Component<NavigationScreenProps<NavigationState, NavigationParams>, DefaultState> {
+class BrandsProducts extends Component<NavigationScreenProps<dataProps>, DefaultState> {
 
-    state = {
+    state:DefaultState = {
         data: {
             name: '',
             products: [],
@@ -35,7 +35,7 @@ class BrandsProducts extends Component<NavigationScreenProps<NavigationState, Na
     render() {
         return (
             <SafeAreaView>
-                <ScrollView>
+                <ScrollView keyboardDismissMode="on-drag">
                     <HeaderApp title="Lista" />
 
                     <View>

@@ -174,6 +174,7 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
         alignItems: 'center',
         flexDirection: 'column',
         // marginTop: RFValue(10),
+        paddingHorizontal: RFValue(10),
         justifyContent: 'center',
         width: '100%',
     },
@@ -186,18 +187,20 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
     },
 
     /**Styles item product */
-    itemProduct: {      
-        borderTopWidth: 2,
+    itemProduct: {
+        borderRadius: 5,
+        backgroundColor: 'rgba(50, 50, 50, 0.1)',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        padding: RFValue(10),  
-        width:'100%',
+        padding: RFValue(10),
+        marginVertical: RFValue(5),
+        width: '100%',
     },
 
     imageProduct: {
         backgroundColor: '#CCC',
         borderRadius: 5,
-        height:128,
+        height: 128,
         marginRight: RFValue(5),
         width: 128,
     },
@@ -215,6 +218,6 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
     itemDescription: {
         color: '#7f8c8d',
         fontSize: RFValue(14),
-        width: '85%',
+        width: '70%',
     },
 })

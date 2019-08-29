@@ -14,7 +14,7 @@ const AppNavigation = createStackNavigator(
         BrandsProduct: BrandsProducts
     },
     {
-        initialRouteName: "Products",
+        initialRouteName: "Index",
         headerMode: "none",
         
     }

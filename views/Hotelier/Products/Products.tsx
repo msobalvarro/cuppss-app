@@ -46,7 +46,7 @@ class Products extends Component<NavigationScreenProps<NavigationState, Navigati
 
         const { name } = props
 
-        if (name.length > 0 && name.toLowerCase().search(this.state.filter) > -1) {
+        if (name.length > 0 && name.toLowerCase().search(this.state.filter.toLocaleLowerCase()) > -1) {
             return (
                 <TouchableOpacity 
                     onPress={
@@ -78,7 +78,7 @@ class Products extends Component<NavigationScreenProps<NavigationState, Navigati
     render() {
         return (
             <SafeAreaView>
-                <ScrollView>
+                <ScrollView keyboardDismissMode="on-drag" onScroll={Keyboard.dismiss}>
 
                     <HeaderApp title="Listado de productos" />
 
