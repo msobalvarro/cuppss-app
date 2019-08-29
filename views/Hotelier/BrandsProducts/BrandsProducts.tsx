@@ -4,6 +4,7 @@ import { SafeAreaView, View, ScrollView, Text } from 'react-native'
 import HeaderApp from '../../../components/Header/Header';
 import { Toast } from '@ant-design/react-native';
 import Stars from '../../../components/Stars/Stars';
+import AvatarName from '../../../components/AvatarName/AvatarName';
 
 interface dataProps {
     name?: string
@@ -45,6 +46,8 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
                             this.state.data.products.map(
                                 (product, index) => (
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} key={index}>
+                                        <AvatarName text={product} />
+                                        
                                         <Text>{product}</Text>
                                         <Stars count={5} />
                                     </View>
