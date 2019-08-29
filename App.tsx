@@ -3,7 +3,7 @@ import Index from './views/Index/Index'
 import Login from './views/Login/Login'
 import MenuHostelier from './views/Hotelier/Menu/Menu'
 import Products from './views/Hotelier/Products/Products'
-import BrandsProducts from './views/Hotelier/BrandsProducts/BrandsProducts'
+import BrandsProduct from './views/Hotelier/BrandsProducts/BrandsProducts'
 
 const AppNavigation = createStackNavigator(
     {
@@ -11,10 +11,10 @@ const AppNavigation = createStackNavigator(
         Login,
         MenuHostelier,
         Products,
-        BrandsProduct: BrandsProducts
+        BrandsProduct,
     },
     {
-        initialRouteName: "Index",
+        initialRouteName: "Products",
         headerMode: "none",
         
     }

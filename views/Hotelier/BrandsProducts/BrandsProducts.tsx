@@ -3,6 +3,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { SafeAreaView, View, ScrollView, Text } from 'react-native'
 import HeaderApp from '../../../components/Header/Header';
 import { Toast } from '@ant-design/react-native';
+import Stars from '../../../components/Stars/Stars';
 
 interface dataProps {
     name?: string
@@ -43,8 +44,9 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
                             (Object.keys(this.state.data).length > 0) &&
                             this.state.data.products.map(
                                 (product, index) => (
-                                    <View key={index}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} key={index}>
                                         <Text>{product}</Text>
+                                        <Stars count={5} />
                                     </View>
                                 )
                             )
