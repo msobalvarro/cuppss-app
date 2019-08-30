@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ViewProps, TextStyle } from 'react-native'
+import { View, Text, StyleSheet, ViewProps, TextStyle, ViewStyle } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 
 const { create } = StyleSheet
@@ -19,6 +19,7 @@ interface AvatarNameState {
 interface AvatarNameProps {
     text: string
     size?: 'small' | 'medium' | 'large' | undefined
+    innerStyles?: ViewStyle
 }
 
 interface AvatarStyles {
@@ -76,6 +77,7 @@ class AvatarName extends Component<AvatarNameProps, AvatarNameState> {
         return (
             <View style={[
                 styles.content,
+                this.props.innerStyles,
                 {
                     backgroundColor: colors[index],
                     height: sizeNumber,

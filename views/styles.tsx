@@ -221,3 +221,48 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
         width: '70%',
     },
 })
+
+
+interface DefaultStyleBrandsProducts {
+    container?: ViewStyle
+    itemBrand?: ViewStyle
+    containerDescriptionItem?: ViewStyle,
+    textItem?: TextStyle,
+    avatar?: ViewStyle
+    search?: TextStyle
+}
+
+export const BrandsProducts = create<DefaultStyleBrandsProducts>({
+    container: {
+        flexDirection: 'column',
+        marginTop: RFValue(5),
+    },
+    itemBrand: {
+        alignItems: 'center',
+        backgroundColor: 'rgba(50, 50, 50, 0.1)',
+        borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: RFValue(10),
+        paddingHorizontal: RFValue(5),
+        margin: RFValue(10),
+    },
+    search: {
+        marginVertical: RFValue(25),
+        marginHorizontal: RFValue(15),
+        width: 'auto',
+    },
+    containerDescriptionItem: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        width: '70%',
+    },
+    avatar: {
+        marginRight: RFValue(10),
+    },
+    textItem: {
+        color: '#4d4d4d',
+        fontSize: RFValue(16),
+        fontWeight: 'bold',
+    },
+})
