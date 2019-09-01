@@ -11,6 +11,8 @@ const AppNavigation = createStackNavigator(
         Login,
         MenuHostelier,
         Products,
+
+        // This needs props for to work
         BrandsProduct,
     },
     {

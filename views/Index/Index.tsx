@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Image, Text, SafeAreaView, View, StatusBar} from 'react-native'
+import { Image, Text, SafeAreaView, View} from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from "react-navigation"
 import { Button } from '@ant-design/react-native'
 import { Index as styles } from '../styles'
+import HiddenBar from '../../components/HiddenBar/HiddenBar'
 /**
  * Selection view of **Hostelers** and **distributors**
  */
@@ -19,7 +20,7 @@ class Index extends Component<NavigationScreenProps<NavigationState, NavigationP
         return (
             <SafeAreaView style={styles.main}>
                 
-                <StatusBar hidden={true} />
+                <HiddenBar />
 
                 <Image style={styles.imageLogo} resizeMode="contain" source={require('../../assets/logo/logo.png')} />
                 

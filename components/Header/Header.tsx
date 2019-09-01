@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, StatusBar, TouchableOpacity, View } from 'react-native'
-import { StackActions, NavigationActions } from 'react-navigation'
+import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, TouchableOpacity, View } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
+import HiddenBar from '../HiddenBar/HiddenBar'
 
 const { create } = StyleSheet
 
@@ -84,7 +84,7 @@ class HeaderApp extends Component<DefaultProps, DefaultState> {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar hidden={true} />
+                <HiddenBar />
 
                 {
                     (this.props.logOut === true) &&

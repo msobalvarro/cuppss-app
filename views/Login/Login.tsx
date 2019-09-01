@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View, CheckBox, Image, StatusBar } from 'react-native'
+import { SafeAreaView, Text, View, CheckBox, Image } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
 import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
-import { Button, WhiteSpace } from '@ant-design/react-native';
+import { Button, WhiteSpace } from '@ant-design/react-native'
+import HiddenBar from '../../components/HiddenBar/HiddenBar'
 
 interface StateTypes {
     email: string,
@@ -45,7 +46,7 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
         return (
             <SafeAreaView style={styles.main}>
                 
-                <StatusBar hidden={true} />
+                <HiddenBar />
 
                 <Image style={styles.imageLogo} resizeMode="contain" source={require('../../assets/logo/logo.png')} />
                 <Text style={styles.textMain}>Login</Text>
