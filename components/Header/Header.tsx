@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, TouchableOpacity, View, NativeMethodsMixin } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import HiddenBar from '../HiddenBar/HiddenBar'
+import { NavigationScreenProps, NavigationState, withNavigation, NavigationParams } from 'react-navigation';
 
 const { create } = StyleSheet
 
@@ -52,7 +53,7 @@ const styles = create<DefaultStyle>({
 })
 
 
-class HeaderApp extends Component<DefaultProps, DefaultState> {
+class HeaderApp extends Component<NavigationScreenProps<NavigationState, NavigationParams> & DefaultProps, DefaultState> {
     state = {
         notification: false
     }
@@ -75,10 +76,7 @@ class HeaderApp extends Component<DefaultProps, DefaultState> {
 
     /**Back a screen */
     redirectBack = () => {
-        // this.props.navigation.pop()
-        // StackActions.pop({ n: 1 })
-        // StackActions.pop({  })
-        // NavigationActions.
+        this.props.navigation.pop()
     }
 
     render() {
@@ -111,4 +109,4 @@ class HeaderApp extends Component<DefaultProps, DefaultState> {
     }
 }
 
-export default HeaderApp
+export default withNavigation(HeaderApp)

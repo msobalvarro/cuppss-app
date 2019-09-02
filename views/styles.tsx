@@ -266,3 +266,25 @@ export const BrandsProducts = create<DefaultStyleBrandsProducts>({
         fontWeight: 'bold',
     },
 })
+
+interface StylesModalComponent {
+    container: ViewStyle,
+    containerChildren: ViewStyle,
+    contentICons?: ViewStyle
+    iconClose?: ImageStyle
+    // modal?: ModalStyle,
+}
+
+export const ModalStyles = create<StylesModalComponent>({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    containerChildren: {
+        backgroundColor: '#FFF',
+        borderRadius: 5,
+        elevation: 10,
+        minHeight: '50%',
+        width: '90%',
+    },
+})

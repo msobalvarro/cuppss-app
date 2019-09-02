@@ -5,9 +5,9 @@ import HeaderApp from '../../../components/Header/Header'
 import { Toast } from '@ant-design/react-native'
 import Stars from '../../../components/Stars/Stars'
 import AvatarName from '../../../components/AvatarName/AvatarName'
-import { BrandsProducts as styles } from '../../styles'
-import Input from '../../../components/Input/Input';
-import ModalProduct from '../../../components/ModalProduct/ModalProduct';
+import { BrandsProducts as styles, ModalStyles } from '../../styles'
+import Input from '../../../components/Input/Input'
+import Modal from 'react-native-modal'
 
 interface dataProps {
     name?: string
@@ -41,6 +41,10 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
         }
     }
 
+    onCloseModal = () => {
+        this.setState({ showModal: false })
+    }
+
     itemBrand = (product, index: number) => {
         if (product.length > 0 && product.toLowerCase().search(this.state.filter.toLocaleLowerCase()) > -1)
             return (
@@ -61,9 +65,18 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
                 <ScrollView keyboardDismissMode="on-drag" onScroll={Keyboard.dismiss}>
                     <HeaderApp title="Lista" />
 
-                    <ModalProduct onClose={() => this.setState({ showModal: false })} active={this.state.showModal}>
-                        <Text>Test container</Text>
-                    </ModalProduct>
+                    <Modal
+                        animationIn="fadeIn"
+                        animationOut="fadeOut"
+                        backdropColor="rgba(50, 50, 50, 0.8)"
+                        style={ModalStyles.container}
+                        onBackButtonPress={this.onCloseModal}
+                        onBackdropPress={this.onCloseModal}
+                        isVisible={this.state.showModal}>
+                        <View style={ModalStyles.containerChildren}>
+                            <Text>List of details</Text>
+                        </View>
+                    </Modal>
 
                     <Input
                         onBlur={Keyboard.dismiss}
