@@ -1,9 +1,9 @@
-import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle, Platform } from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Dimensions } from 'react-native'
-import { mainColor, contrastColor } from './util';
+import { mainColor, contrastColor, colorText } from './util';
 
-const { create } = StyleSheet
+const { create, absoluteFillObject } = StyleSheet
 
 /**Dimension screen app */
 export const { width, height } = Dimensions.get("screen")
@@ -313,23 +313,46 @@ export const BrandsProducts = create<DefaultStyleBrandsProducts>({
 interface DefaultStylesProductModel {
     carousel?: ViewStyle
     containerImageCarouse?: ViewStyle
+    containerParalax?: ViewStyle
     imageCarousel?: ImageStyle
     nameProduct?: TextStyle
+    containerDescription?: ViewStyle
+    containerRow?: ViewStyle
+    // containerCol?: ViewStyle
+    textTitle?: TextStyle
+    textDescription?: TextStyle
 }
 
 export const ProductModel = create<DefaultStylesProductModel>({
     containerImageCarouse: {
         // backgroundColor: 'red',
         alignItems: 'center',
+        flex: 1,
         justifyContent: 'center',
-        marginTop: RFValue(25),
+        // marginTop: RFValue(25),
+        height: screenHeight(30),
+        paddingVertical: RFValue(20),
     },
+
+    // containerParalax: {
+    //     alignItems: 'center',
+    //     backgroundColor: 'white',
+    //     borderRadius: 8,
+    //     elevation: 10,
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     width: '80%',
+    //     marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
+    // },
 
     imageCarousel: {
         resizeMode: 'contain',
-        height: screenHeight(50),
+        // flex: 1,
+        // ...absoluteFillObject,
         // elevation: 10,
-        width: '80%',
+        height: '100%',
+        width: '100%',
+        
     },
 
     nameProduct: {
@@ -337,5 +360,19 @@ export const ProductModel = create<DefaultStylesProductModel>({
         fontSize: RFValue(24),
         marginVertical: RFValue(25),
         textAlign: 'center',
+    },
+
+    containerDescription: {},
+
+    containerRow: {
+        marginVertical: RFValue(10),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: RFValue(10),
+    },
+
+    textTitle: {
+        fontWeight: 'bold',
+        color: colorText,
     }
 })
