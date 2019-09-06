@@ -4,6 +4,7 @@ import Login from './views/Login/Login'
 import MenuHostelier from './views/Hotelier/Menu/Menu'
 import Products from './views/Hotelier/Products/Products'
 import BrandsProduct from './views/Hotelier/BrandsProducts/BrandsProducts'
+import ProductModel from './views/Hotelier/ProductModel/ProductModel'
 
 const AppNavigation = createStackNavigator(
     {
@@ -14,9 +15,11 @@ const AppNavigation = createStackNavigator(
 
         // This needs props for to work
         BrandsProduct,
+
+        ProductModel,
     },
     {
-        initialRouteName: "Products",
+        initialRouteName: "ProductModel",
         headerMode: "none",
     }
 )

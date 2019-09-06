@@ -1,6 +1,7 @@
 import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Dimensions } from 'react-native'
+import { mainColor, contrastColor } from './util';
 
 const { create } = StyleSheet
 
@@ -17,11 +18,33 @@ const screenHeight = (e: number): number => {
     return Number(height * Number(`0.${e}`))
 }
 
+interface StylesModalComponent {
+    container: ViewStyle
+    containerChildren: ViewStyle
+    contentICons?: ViewStyle
+    iconClose?: ImageStyle
+    // modal?: ModalStyle
+}
+
+export const ModalStyles = create<StylesModalComponent>({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    containerChildren: {
+        backgroundColor: '#FFF',
+        borderRadius: 5,
+        elevation: 10,
+        minHeight: '50%',
+        width: '90%',
+    },
+})
+
 interface DefaultStylesIndex {
-    buttons?: ViewStyle,
-    main: ViewStyle,
-    imageLogo: ImageStyle,
-    containerButtons?: ViewStyle,
+    buttons?: ViewStyle
+    main: ViewStyle
+    imageLogo: ImageStyle
+    containerButtons?: ViewStyle
     textButton?: TextStyle
 }
 
@@ -66,13 +89,13 @@ export const Index = create<DefaultStylesIndex>({
 })
 
 interface DefaultStyleLogin {
-    main: ViewStyle,
-    textMain?: TextStyle,
-    imageLogo?: ImageStyle,
-    containerForm?: ViewStyle,
-    inputs?: TextStyle,
+    main: ViewStyle
+    textMain?: TextStyle
+    imageLogo?: ImageStyle
+    containerForm?: ViewStyle
+    inputs?: TextStyle
     containerCheck?: ViewStyle
-    rowCheck?: ViewStyle,
+    rowCheck?: ViewStyle
     textCheck?: ViewStyle
 
 }
@@ -127,9 +150,9 @@ export const Login = create<DefaultStyleLogin>({
 })
 
 interface DefaultStyleMenuHostelier {
-    container?: ViewStyle,
-    rowItem?: ViewStyle,
-    items?: ViewStyle,
+    container?: ViewStyle
+    rowItem?: ViewStyle
+    items?: ViewStyle
 }
 
 export const MenuHostelier = create<DefaultStyleMenuHostelier>({
@@ -157,14 +180,14 @@ export const MenuHostelier = create<DefaultStyleMenuHostelier>({
 })
 
 interface DefaultStyleProdcutsHostelier {
-    container: ViewStyle,
-    itemProduct?: ViewStyle,
-    // imageProduct?: ImageStyle,
-    search?: TextStyle,
-    imageProduct?: ViewStyle,
-    itemContainerText?: TextStyle,
-    itemTitle?: TextStyle,
-    itemDescription?: TextStyle,
+    container: ViewStyle
+    itemProduct?: ViewStyle
+    // imageProduct?: ImageStyle
+    search?: TextStyle
+    imageProduct?: ViewStyle
+    itemContainerText?: TextStyle
+    itemTitle?: TextStyle
+    itemDescription?: TextStyle
 
 }
 
@@ -189,7 +212,7 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
     /**Styles item product */
     itemProduct: {
         borderRadius: 5,
-        backgroundColor: 'rgba(50, 50, 50, 0.1)',
+        backgroundColor: contrastColor,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         padding: RFValue(10),
@@ -206,6 +229,7 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
     },
 
     itemContainerText: {
+        color: '#4d4d4d',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
     },
@@ -226,10 +250,13 @@ export const ProductsHostelier = create<DefaultStyleProdcutsHostelier>({
 interface DefaultStyleBrandsProducts {
     container?: ViewStyle
     itemBrand?: ViewStyle
-    containerDescriptionItem?: ViewStyle,
-    textItem?: TextStyle,
+    containerDescriptionItem?: ViewStyle
+    textItem?: TextStyle
     avatar?: ViewStyle
     search?: TextStyle
+    titleModal?: TextStyle
+    itemProduct?: ViewStyle
+    itemProductText?: TextStyle
 }
 
 export const BrandsProducts = create<DefaultStyleBrandsProducts>({
@@ -239,7 +266,7 @@ export const BrandsProducts = create<DefaultStyleBrandsProducts>({
     },
     itemBrand: {
         alignItems: 'center',
-        backgroundColor: 'rgba(50, 50, 50, 0.1)',
+        backgroundColor: contrastColor,
         borderRadius: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -265,26 +292,50 @@ export const BrandsProducts = create<DefaultStyleBrandsProducts>({
         fontSize: RFValue(16),
         fontWeight: 'bold',
     },
+    titleModal: {
+        fontSize: RFValue(24),
+        color: mainColor,
+        textAlign: 'center',
+    },
+    itemProduct: {
+        // backgroundColor: contrastColor,
+        // borderRadius: 5,
+        paddingHorizontal: RFValue(5),
+        paddingVertical: RFValue(8),
+        // marginVertical: RFValue(10),
+        width: '100%'
+    },
+    itemProductText: {
+        fontSize: RFValue(18),
+    },
 })
 
-interface StylesModalComponent {
-    container: ViewStyle,
-    containerChildren: ViewStyle,
-    contentICons?: ViewStyle
-    iconClose?: ImageStyle
-    // modal?: ModalStyle,
+interface DefaultStylesProductModel {
+    carousel?: ViewStyle
+    containerImageCarouse?: ViewStyle
+    imageCarousel?: ImageStyle
+    nameProduct?: TextStyle
 }
 
-export const ModalStyles = create<StylesModalComponent>({
-    container: {
+export const ProductModel = create<DefaultStylesProductModel>({
+    containerImageCarouse: {
+        // backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: RFValue(25),
     },
-    containerChildren: {
-        backgroundColor: '#FFF',
-        borderRadius: 5,
-        elevation: 10,
-        minHeight: '50%',
-        width: '90%',
+
+    imageCarousel: {
+        resizeMode: 'contain',
+        height: screenHeight(50),
+        // elevation: 10,
+        width: '80%',
     },
+
+    nameProduct: {
+        color: '#cd6133',
+        fontSize: RFValue(24),
+        marginVertical: RFValue(25),
+        textAlign: 'center',
+    }
 })
