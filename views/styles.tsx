@@ -376,13 +376,14 @@ export const ProductModel = create<DefaultStylesProductModel>({
         alignItems: 'center',
         // justifyContent: 'center',
         flexDirection: 'column',
+        paddingHorizontal: RFValue(5),
         marginVertical: RFValue(20),
         // height: screenHeight(10),
     },
 
     unitTitle: {
         color: colorText,
-        fontSize: RFValue(24),
+        fontSize: RFValue(18),
         fontWeight: '100',
         marginBottom: RFValue(10),
     },
@@ -394,7 +395,7 @@ export const ProductModel = create<DefaultStylesProductModel>({
     },
 
     textInputUnit: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: colorText,
         borderRadius: 5,
         flex: 1,
@@ -403,11 +404,10 @@ export const ProductModel = create<DefaultStylesProductModel>({
     },
 
     buttonsUnit: {
-        borderRadius: 5,
-        borderColor: colorText,
-        borderWidth: 2,
+        backgroundColor: contrastColor,
+        borderRadius: 5,        
         marginHorizontal: RFValue(5),
-        padding: RFValue(5),
+        padding: RFValue(10),
     },
 
     imageButtonsUnit: {

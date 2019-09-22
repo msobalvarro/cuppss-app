@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavigationScreenProps, ScrollView } from 'react-navigation'
-import { SafeAreaView, Keyboard, View, Image, ImageSourcePropType, Text, TouchableOpacity, TextInput } from 'react-native'
+import { SafeAreaView, Keyboard, View, Image, ImageSourcePropType, Text, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import Header from '../../../components/Header/Header'
 import { ProductModel as styles, width } from '../../styles'
@@ -11,7 +11,7 @@ interface ModelProductProps { }
 
 interface ModelProductState {
     allImage: Array<ImageSourcePropType>
-    productNumber: string
+    productNumber: number
 }
 
 class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, ModelProductState> {
@@ -21,7 +21,7 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
             require('./image/second.png'),
             require('./image/third.png')
         ],
-        productNumber: "1"
+        productNumber: 1
     }
 
     componentWillMount() {
@@ -40,6 +40,22 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
                 /> */}
             </View>
         )
+    }
+
+    /**Sum number products */
+    sumProduct = () => {
+        const { productNumber } = this.state
+
+        this.setState({ productNumber: productNumber + 1 })
+    }
+
+    /**Minus product of state */
+    minustProduct = () => {
+        const { productNumber } = this.state
+
+        if(productNumber !== 1) {
+            this.setState({ productNumber: productNumber - 1 })
+        }
     }
 
     render() {
@@ -114,29 +130,29 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
                     </View>
 
                     {/* Units to buy */}
-                    <View style={styles.containerUnit}>
+                    <KeyboardAvoidingView behavior="padding" enabled style={styles.containerUnit}>
                         <Text style={styles.unitTitle}>Unidades a Comprar</Text>
 
                         <View style={styles.containerUnitToBuy}>
                             <TextInput
                                 placeholder="Digite una cantidad"
                                 keyboardType="numeric"
-                                defaultValue={this.state.productNumber}
+                                defaultValue={this.state.productNumber.toString()}
                                 keyboardAppearance="dark"
                                 style={styles.textInputUnit}
                             />
 
-                            <TouchableOpacity style={styles.buttonsUnit}>
+                            <TouchableOpacity style={styles.buttonsUnit} onPress={this.sumProduct}>
                                 <Image source={require('./image/add.png')} style={styles.imageButtonsUnit} />
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.buttonsUnit}>
+                            <TouchableOpacity style={styles.buttonsUnit} onPress={this.minustProduct}>
                                 <Image source={require('./image/remove.png')} style={styles.imageButtonsUnit} />
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </KeyboardAvoidingView>
 
-                    <Button innerStyles={{ marginTop: RFValue(10) }} size="small" type="error">Agregar a Catalogo</Button>
+                    <Button innerStyles={{ marginVertical: RFValue(10) }} size="small" type="error">Agregar a Catalogo</Button>
                 </ScrollView>
             </SafeAreaView>
         )
