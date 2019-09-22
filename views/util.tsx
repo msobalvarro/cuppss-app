@@ -1,5 +1,5 @@
-export const mainColor = '#8a164b'
+export const mainColor:string = '#8a164b'
 
-export const contrastColor = 'rgba(50, 50, 50, 0.1)'
+export const contrastColor:string = 'rgba(50, 50, 50, 0.1)'
 
-export const colorText = '#4d4d4d'
+export const colorText:string = '#4d4d4d'

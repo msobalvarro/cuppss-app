@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle, ImageStyle, TextStyle, Platform } from 'react-native'
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import { Dimensions } from 'react-native'
 import { mainColor, contrastColor, colorText } from './util';
@@ -321,6 +321,13 @@ interface DefaultStylesProductModel {
     // containerCol?: ViewStyle
     textTitle?: TextStyle
     textDescription?: TextStyle
+    containerUnit?: ViewStyle
+    unitTitle?: TextStyle
+    containerUnitToBuy?: ViewStyle
+    inputUnit?: ViewStyle
+    buttonsUnit?: ViewStyle
+    imageButtonsUnit?: ImageStyle
+    textInputUnit?: TextStyle
 }
 
 export const ProductModel = create<DefaultStylesProductModel>({
@@ -334,17 +341,6 @@ export const ProductModel = create<DefaultStylesProductModel>({
         paddingVertical: RFValue(20),
     },
 
-    // containerParalax: {
-    //     alignItems: 'center',
-    //     backgroundColor: 'white',
-    //     borderRadius: 8,
-    //     elevation: 10,
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     width: '80%',
-    //     marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
-    // },
-
     imageCarousel: {
         resizeMode: 'contain',
         // flex: 1,
@@ -352,7 +348,7 @@ export const ProductModel = create<DefaultStylesProductModel>({
         // elevation: 10,
         height: '100%',
         width: '100%',
-        
+
     },
 
     nameProduct: {
@@ -374,5 +370,50 @@ export const ProductModel = create<DefaultStylesProductModel>({
     textTitle: {
         fontWeight: 'bold',
         color: colorText,
-    }
+    },
+
+    containerUnit: {
+        alignItems: 'center',
+        // justifyContent: 'center',
+        flexDirection: 'column',
+        marginVertical: RFValue(20),
+        // height: screenHeight(10),
+    },
+
+    unitTitle: {
+        color: colorText,
+        fontSize: RFValue(24),
+        fontWeight: '100',
+        marginBottom: RFValue(10),
+    },
+
+    containerUnitToBuy: {
+        flexDirection: 'row',
+        // justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+
+    textInputUnit: {
+        borderWidth: 2,
+        borderColor: colorText,
+        borderRadius: 5,
+        flex: 1,
+        marginHorizontal: RFValue(5),
+        padding: RFValue(5),
+    },
+
+    buttonsUnit: {
+        borderRadius: 5,
+        borderColor: colorText,
+        borderWidth: 2,
+        marginHorizontal: RFValue(5),
+        padding: RFValue(5),
+    },
+
+    imageButtonsUnit: {
+        resizeMode: 'contain',
+        height: RFValue(25),        
+        width: RFValue(25),
+    },
+
 })

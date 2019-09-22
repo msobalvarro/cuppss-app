@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { NavigationScreenProps, ScrollView } from 'react-navigation'
-import { SafeAreaView, Keyboard, View, Image, ImageSourcePropType, Text } from 'react-native'
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel'
+import { SafeAreaView, Keyboard, View, Image, ImageSourcePropType, Text, TouchableOpacity, TextInput } from 'react-native'
+import Carousel from 'react-native-snap-carousel'
 import Header from '../../../components/Header/Header'
 import { ProductModel as styles, width } from '../../styles'
+import Button from '../../../components/Button/Button'
+import { RFValue } from 'react-native-responsive-fontsize'
 
 interface ModelProductProps { }
 
 interface ModelProductState {
-    allImage?: Array<ImageSourcePropType>
+    allImage: Array<ImageSourcePropType>
+    productNumber: string
 }
 
 class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, ModelProductState> {
@@ -17,7 +20,8 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
             require('./image/first.png'),
             require('./image/second.png'),
             require('./image/third.png')
-        ]
+        ],
+        productNumber: "1"
     }
 
     componentWillMount() {
@@ -44,6 +48,7 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
                 <ScrollView keyboardDismissMode="on-drag" onScroll={Keyboard.dismiss}>
                     <Header title="Comprar Producto" />
 
+                    {/* Carousel Images */}
                     <Carousel
                         style={styles.carousel}
                         data={this.state.allImage}
@@ -54,13 +59,14 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
                     />
 
                     <Text style={styles.nameProduct}>Flor de Joya 1000 ML</Text>
-
+                    
+                    {/* Buy description */}
                     <View style={styles.containerDescription}>
                         <View style={styles.containerRow}>
                             <Text style={styles.textTitle}>
                                 Precio
                             </Text>
-                            
+
                             <Text style={styles.textDescription}>
                                 $ 25
                             </Text>
@@ -106,6 +112,31 @@ class ModelProduct extends Component<NavigationScreenProps<ModelProductProps>, M
                             </Text>
                         </View>
                     </View>
+
+                    {/* Units to buy */}
+                    <View style={styles.containerUnit}>
+                        <Text style={styles.unitTitle}>Unidades a Comprar</Text>
+
+                        <View style={styles.containerUnitToBuy}>
+                            <TextInput
+                                placeholder="Digite una cantidad"
+                                keyboardType="numeric"
+                                defaultValue={this.state.productNumber}
+                                keyboardAppearance="dark"
+                                style={styles.textInputUnit}
+                            />
+
+                            <TouchableOpacity style={styles.buttonsUnit}>
+                                <Image source={require('./image/add.png')} style={styles.imageButtonsUnit} />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.buttonsUnit}>
+                                <Image source={require('./image/remove.png')} style={styles.imageButtonsUnit} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                    <Button innerStyles={{ marginTop: RFValue(10) }} size="small" type="error">Agregar a Catalogo</Button>
                 </ScrollView>
             </SafeAreaView>
         )

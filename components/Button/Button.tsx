@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { TouchableOpacityProps, TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize'
 import { colorText, mainColor } from '../../views/util';
@@ -6,9 +6,10 @@ import { colorText, mainColor } from '../../views/util';
 const { create } = StyleSheet
 
 interface ButtonProps {
-    children: JSX.Element[] | JSX.Element
+    // children: string
     type?: 'primary' | 'warning' | 'error' | 'outline'
     size?: 'normal' | 'small' | 'large'
+    innerStyles?: ViewStyle
 }
 
 interface ButtonStylesProps {
@@ -22,23 +23,31 @@ interface ButtonState {
     size?: number
 }
 
-class Button extends PureComponent<TouchableOpacityProps & ButtonProps, ButtonState> {
-    state: ButtonState = {}
+class Button extends Component<TouchableOpacityProps & ButtonProps, ButtonState> {
+    state: ButtonState = {
+        backgroundColor: mainColor,
+        colorText: '#FFF',
+        size: RFValue(18),
+    }
 
     styles = create<ButtonStylesProps>({
         container: {
-            padding: RFValue(5),
+            alignItems: 'center',
+            backgroundColor: this.state.backgroundColor,
+            borderWidth: 2,
+            borderColor: (this.props.type === 'outline') ? mainColor : 'transparent',
             borderRadius: RFValue(25),
+            paddingVertical: RFValue(10),
         },
 
         text: {
-            color: (this.props.type === 'outline') ? colorText : '#FFF',
-            // fontSize: 
+            color: this.state.colorText,
+            fontSize: this.state.size,
         },
     })
 
     componentWillMount = () => {
-        let backgroundColor, colorText, _size
+        let backgroundColor, colorText = '#FFF', _size
 
         const { type, size } = this.props
 
@@ -57,14 +66,39 @@ class Button extends PureComponent<TouchableOpacityProps & ButtonProps, ButtonSt
 
             case 'outline':
                 backgroundColor = 'transparent'
+                colorText = mainColor
+                break
+
+            default:
+                backgroundColor = mainColor
+                break
         }
 
+        switch (size) {
+            case 'normal':
+                _size = RFValue(18)
+                break
+
+            case 'large':
+                _size = RFValue(22)
+                break
+
+            case 'small':
+                _size = RFValue(14)
+                break
+
+            default:
+                _size = RFValue(18)
+                break
+        }
+
+        this.setState({ backgroundColor, colorText, size: _size })
 
     }
 
     render() {
         return (
-            <TouchableOpacity style={this.styles.container} {...this.props}>
+            <TouchableOpacity style={[this.styles.container, this.props.innerStyles]} {...this.props}>
                 <Text style={this.styles.text}>{this.props.children}</Text>
             </TouchableOpacity>
         )
