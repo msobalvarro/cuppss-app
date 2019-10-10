@@ -1,6 +1,5 @@
 import React from 'react'
-import { Image, Text, ImageSourcePropType, StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image, Text, ImageSourcePropType, StyleSheet, ViewStyle, ImageStyle, TextStyle, TouchableOpacity } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const { create } = StyleSheet
