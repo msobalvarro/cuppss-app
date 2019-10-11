@@ -8,17 +8,17 @@ import AvatarName from '../../../components/AvatarName/AvatarName'
 import { BrandsProducts as styles, ModalStyles } from '../../styles'
 import Input from '../../../components/Input/Input'
 import Modal from 'react-native-modal'
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize'
 
 interface dataProps {
     name?: string
-    products?: ObjectArray
+    products?: Array<any>
 }
 
 interface DefaultState {
     data: dataProps
-    filter?: string
-    showModal?: boolean
+    filter: string
+    showModal: boolean
     nameSelect?: string
 }
 
@@ -44,11 +44,17 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
         }
     }
 
+    /**Method move to model view */
+    moveViewToModel = () => {
+        this.setState({ showModal: false }, () => this.props.navigation.navigate({ routeName: 'ProductModel' }))
+    }
+
+    /**Method close modal */
     onCloseModal = () => {
         this.setState({ showModal: false })
     }
 
-    itemBrand = (product, index: number) => {
+    itemBrand = (product: string, index: number) => {
         if (product.length > 0 && product.toLowerCase().search(this.state.filter.toLocaleLowerCase()) > -1)
             return (
                 <TouchableOpacity onPress={() => this.setState({ showModal: true, nameSelect: product })} style={styles.itemBrand} key={index}>
@@ -76,7 +82,7 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
                         isVisible={this.state.showModal}
                         onBackdropPress={this.onCloseModal}
                         style={ModalStyles.container}>
-                        <View style={[ModalStyles.containerChildren, {
+                        <ScrollView style={[ModalStyles.containerChildren, {
                             padding: RFValue(10)
                         }]}>
                             <Text style={styles.titleModal}>{this.state.nameSelect}</Text>
@@ -84,24 +90,18 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
                             <WhiteSpace style={{ borderBottomColor: '#CCC', borderBottomWidth: 2 }} />
 
                             <React.Fragment>
-                                <TouchableOpacity style={styles.itemProduct}>
-                                    <Text style={styles.itemProductText}>Product Detail</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.itemProduct}>
-                                    <Text style={styles.itemProductText}>Product Detail</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.itemProduct}>
-                                    <Text style={styles.itemProductText}>Product Detail</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.itemProduct}>
-                                    <Text style={styles.itemProductText}>Product Detail</Text>
-                                </TouchableOpacity>
+                                {
+                                    new Array(20).fill(true).map(
+                                        (_: boolean, index: number) => (
+                                            <TouchableOpacity key={index} onPress={this.moveViewToModel} style={styles.itemProduct}>
+                                                <Text style={styles.itemProductText}>Product Detail</Text>
+                                            </TouchableOpacity>
+                                        )
+                                    )
+                                }
                             </React.Fragment>
 
-                        </View>
+                        </ScrollView>
                     </Modal>
 
                     <Input
@@ -112,8 +112,7 @@ class BrandsProducts extends Component<NavigationScreenProps<dataProps>, Default
 
                     <View style={styles.container}>
                         {
-                            (Object.keys(this.state.data).length > 0) &&
-                            this.state.data.products.map(this.itemBrand)
+                            (Object.keys(this.state.data).length > 0) && this.state.data.products.map(this.itemBrand)
                         }
                     </View>
                 </ScrollView>

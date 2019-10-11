@@ -14,6 +14,7 @@
     "@types/react-native-snap-carousel": "^3.7.4",
     "react": "16.9.0",
     "react-native": "0.61.2",
+    "react-native-device-info": "^3.1.4",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-modal": "^11.3.1",
     "react-native-reanimated": "^1.1.0",

@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 import { SafeAreaView, Text, View, CheckBox, Image } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
+import device from 'react-native-device-info'
 import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
 import { Button, WhiteSpace } from '@ant-design/react-native'
 import HiddenBar from '../../components/HiddenBar/HiddenBar'
+
+interface DeviceInfoType {
+    imei: string
+    mac: string
+    brand: string
+    model: string
+    coordinate: string
+}
 
 interface StateTypes {
     email: string,
@@ -12,20 +21,34 @@ interface StateTypes {
     hosteler: boolean,
     showPassword: boolean,
     remember: boolean,
+    deviceInfo: DeviceInfoType
 }
 
 class Login extends Component<NavigationScreenProps<NavigationState, NavigationParams>, StateTypes> {
-    state = {
+    state: StateTypes = {
         email: '',
         password: '',
         hosteler: true,
         showPassword: false,
         remember: false,
+        deviceInfo: {
+            brand: '',
+            model: '',
+            imei: '',
+            mac: '',
+            coordinate: ''
+        }
     }
 
-    // componentDidMount() {
-    //     console.log(this.props)
-    // }
+    componentDidMount() {
+        device.getBrand().then(
+            (brand:string) => console.log(brand)
+        )
+
+        device.getMacAddress().then(
+            (mac:string) => console.log(mac)
+        )
+    }
 
     /**Checked true/false show password */
     onHandledChangeShowPassword = () => {
@@ -45,7 +68,7 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
     render() {
         return (
             <SafeAreaView style={styles.main}>
-                
+
                 <HiddenBar />
 
                 <Image style={styles.imageLogo} resizeMode="contain" source={require('../../assets/logo/logo.png')} />
