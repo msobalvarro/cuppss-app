@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View, CheckBox, Image } from 'react-native'
+import { SafeAreaView, Text, View, CheckBox, Image, Alert } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
+import RNLocation, { Location } from 'react-native-location'
 import device from 'react-native-device-info'
 import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
@@ -8,20 +9,20 @@ import { Button, WhiteSpace } from '@ant-design/react-native'
 import HiddenBar from '../../components/HiddenBar/HiddenBar'
 
 interface DeviceInfoType {
-    imei: string
     mac: string
     brand: string
     model: string
-    coordinate: string
+    coordinate?: string
 }
 
 interface StateTypes {
-    email: string,
-    password: string,
-    hosteler: boolean,
-    showPassword: boolean,
-    remember: boolean,
+    email: string
+    password: string
+    hosteler: boolean
+    showPassword: boolean
+    remember: boolean
     deviceInfo: DeviceInfoType
+    loader: boolean
 }
 
 class Login extends Component<NavigationScreenProps<NavigationState, NavigationParams>, StateTypes> {
@@ -34,20 +35,93 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
         deviceInfo: {
             brand: '',
             model: '',
-            imei: '',
             mac: '',
             coordinate: ''
-        }
+        },
+        loader: false,
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        const { deviceInfo } = this.state
+
         device.getBrand().then(
-            (brand:string) => console.log(brand)
+            (brand: string) => this.setState({
+                deviceInfo: {
+                    ...deviceInfo,
+                    brand
+                }
+            })
+        )
+
+        device.getModel().then(
+            (model: string) => this.setState({
+                deviceInfo: {
+                    ...deviceInfo,
+                    model
+                }
+            })
         )
 
         device.getMacAddress().then(
-            (mac:string) => console.log(mac)
+            (mac: string) => this.setState({
+                deviceInfo: {
+                    ...deviceInfo,
+                    mac
+                }
+            })
         )
+
+        RNLocation.configure({
+            distanceFilter: 0.5
+        })
+
+        RNLocation.requestPermission({
+            ios: "whenInUse",
+            android: {
+                detail: "coarse"
+            }
+        }).then(
+            (granten: any) => {
+                if (granten) {
+                    RNLocation.subscribeToLocationUpdates(
+                        (location: Location[]) => {
+                            const coordinate: string = location[0].latitude + ', ' + location[0].longitude
+
+                            this.setState({
+                                deviceInfo: {
+                                    ...deviceInfo,
+                                    coordinate
+                                }
+                            })
+                        }
+                    )
+                }
+            }
+        ).catch(
+            (reasons: any) => {
+                Alert.alert(
+                    'Error de ubicacion',
+                    'Compruebe que su GPS esté activo e inténtelo de nuevo',
+                    [
+                        {
+                            onPress: () => { },
+                            text: 'Cerrar',
+                            style: 'cancel',
+                        }
+                    ]
+                )
+            }
+        )
+
+
+    }
+
+    /**Get current client location */
+    getLocation = async () => {
+        this.setState({ loader: true })
+
+        // await navigator
+        // await geolo
     }
 
     /**Checked true/false show password */
@@ -113,9 +187,9 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
 
                     <Button type="warning" onPress={
                         () => this.props.navigation.navigate({ routeName: 'MenuHostelier' })
-                    }>Iniciar Sesion</Button>
+                    } loading={this.state.loader}>Iniciar Sesion</Button>
                     <WhiteSpace />
-                    <Button onPress={this.returnToindex} type="ghost">Volver a Inicio</Button>
+                    <Button onPress={this.returnToindex} type="ghost" disabled={this.state.loader}>Volver a Inicio</Button>
                 </View>
 
             </SafeAreaView>

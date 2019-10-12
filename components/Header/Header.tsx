@@ -72,6 +72,8 @@ class HeaderApp extends Component<NavigationScreenProps<NavigationState, Navigat
 
         // StackActions.popToTop({ immediate: true })
         // StackActions.
+
+        // this.props.navigation.
     }
 
     /**Back a screen */
