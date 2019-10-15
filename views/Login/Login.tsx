@@ -11,6 +11,7 @@ import HiddenBar from '../../components/HiddenBar/HiddenBar'
 import { urlServer } from '../util'
 import Loader from '../../components/Loader/Loader'
 import { RFValue } from 'react-native-responsive-fontsize'
+import validator from 'validator'
 
 interface DeviceInfoType {
     mac: string
@@ -135,17 +136,23 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
 
         const { email, password, deviceInfo } = this.state
 
-        Axios.post(`${urlServer}/login`, { email, password, deviceInfo, mobile: true }).then(
-            (data: AxiosResponse) => {
-                console.log(data.status)
-                if(data.data.error || data.status === 401) {
-                    this.setState({ loginFailed: true })
-                }
+        // Validate data login
+        if (validator.isEmail(email) && !validator.isEmpty(password)) {
+            Axios.post(`${urlServer}/login`, { email, password, deviceInfo, mobile: true }).then(
+                (data: AxiosResponse) => {
+                    console.log(data.status)
+                    if (data.data.error || data.status === 401) {
+                        this.setState({ loginFailed: true })
+                    }
 
-                // Login Succesfull
-                // this.props.navigation.navigate({ routeName: 'MenuHostelier' })
-            }
-        )
+                    // Login Succesfull
+                    // this.props.navigation.navigate({ routeName: 'MenuHostelier' })
+                }
+            )
+        } else {
+            this.setState({ loginFailed: true })
+        }
+
 
         this.setState({ loader: false })
     }
