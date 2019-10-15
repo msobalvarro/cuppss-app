@@ -3,10 +3,14 @@ import { SafeAreaView, Text, View, CheckBox, Image, Alert } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
 import RNLocation, { Location } from 'react-native-location'
 import device from 'react-native-device-info'
+import Axios, { AxiosResponse } from 'axios'
 import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
-import { Button, WhiteSpace } from '@ant-design/react-native'
+import { Button, WhiteSpace, NoticeBar } from '@ant-design/react-native'
 import HiddenBar from '../../components/HiddenBar/HiddenBar'
+import { urlServer } from '../util'
+import Loader from '../../components/Loader/Loader'
+import { RFValue } from 'react-native-responsive-fontsize'
 
 interface DeviceInfoType {
     mac: string
@@ -23,7 +27,12 @@ interface StateTypes {
     remember: boolean
     deviceInfo: DeviceInfoType
     loader: boolean
+    loginFailed: boolean
 }
+
+const ImageError = () => (
+    <Image style={{ width: RFValue(15), height: RFValue(15) }} source={require('../../assets/icon-error-auth.png')} />
+)
 
 class Login extends Component<NavigationScreenProps<NavigationState, NavigationParams>, StateTypes> {
     state: StateTypes = {
@@ -39,9 +48,12 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
             coordinate: ''
         },
         loader: false,
+        loginFailed: false,
     }
 
     async componentDidMount() {
+        this.setState({ loader: true })
+
         const { deviceInfo } = this.state
 
         device.getBrand().then(
@@ -113,15 +125,29 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
             }
         )
 
-
+        // En the all process
+        this.setState({ loader: false })
     }
 
-    /**Get current client location */
-    getLocation = async () => {
+    /**Method login button press in view */
+    tryLogin = () => {
         this.setState({ loader: true })
 
-        // await navigator
-        // await geolo
+        const { email, password, deviceInfo } = this.state
+
+        Axios.post(`${urlServer}/login`, { email, password, deviceInfo, mobile: true }).then(
+            (data: AxiosResponse) => {
+                console.log(data.status)
+                if(data.data.error || data.status === 401) {
+                    this.setState({ loginFailed: true })
+                }
+
+                // Login Succesfull
+                // this.props.navigation.navigate({ routeName: 'MenuHostelier' })
+            }
+        )
+
+        this.setState({ loader: false })
     }
 
     /**Checked true/false show password */
@@ -169,6 +195,13 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
                         placeholder="Password"
                         secureTextEntry={!this.state.showPassword} />
 
+                    {
+                        this.state.loginFailed &&
+                        <NoticeBar style={styles.NoticeBar} mode="closable" icon={<ImageError />}>
+                            Usuario o clave incorrecta
+                        </NoticeBar>
+                    }
+
                     <View style={styles.containerCheck}>
                         <View style={styles.rowCheck}>
                             <CheckBox value={this.state.showPassword} onChange={this.onHandledChangeShowPassword} />
@@ -185,12 +218,12 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
                         </View>
                     </View>
 
-                    <Button type="warning" onPress={
-                        () => this.props.navigation.navigate({ routeName: 'MenuHostelier' })
-                    } loading={this.state.loader}>Iniciar Sesion</Button>
+                    <Button type="warning" onPress={this.tryLogin} loading={this.state.loader}>Iniciar Sesion</Button>
                     <WhiteSpace />
                     <Button onPress={this.returnToindex} type="ghost" disabled={this.state.loader}>Volver a Inicio</Button>
                 </View>
+
+                <Loader active={this.state.loader} />
 
             </SafeAreaView>
         )

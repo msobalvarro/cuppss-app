@@ -97,6 +97,7 @@ interface DefaultStyleLogin {
     containerCheck?: ViewStyle
     rowCheck?: ViewStyle
     textCheck?: ViewStyle
+    NoticeBar?: ViewStyle
 
 }
 
@@ -145,7 +146,11 @@ export const Login = create<DefaultStyleLogin>({
     rowCheck: {
         alignItems: 'center',
         flexDirection: 'row',
-    }
+    },
+
+    NoticeBar: {
+        marginTop: RFValue(10)
+    },
 
 })
 
