@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, TouchableOpacity, View, NativeMethodsMixin } from 'react-native'
+import { StyleSheet, ViewStyle, Text, TextStyle, Image, ImageStyle, TouchableOpacity, View, NativeMethodsMixin, Alert } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import HiddenBar from '../HiddenBar/HiddenBar'
 import { NavigationScreenProps, NavigationState, withNavigation, NavigationParams } from 'react-navigation';
@@ -59,10 +59,28 @@ class HeaderApp extends Component<NavigationScreenProps<NavigationState, Navigat
     }
 
     componentDidMount() {
-        console.log()        
+        console.log()
     }
 
     logOut = () => {
+        Alert.alert('Confirmacion', 'cerrar sesion', [
+            {
+                text: 'Si, cerrrar',
+                onPress: () => {
+                    const { navigation } = this.props
+
+                    // @ts-ignore
+                    navigation.dispatch(navigation.navigate({ routeName: 'Index' }))
+                },
+                style: 'default'
+            },
+            {
+                text: 'Cancelar',
+                onPress: () => { },
+                style: 'cancel'
+            }
+        ])
+
         // const Reset = StackActions.reset({
         //     index: 0,
         //     actions: [NavigationActions.navigate({ routeName: 'Index' })]
@@ -92,7 +110,7 @@ class HeaderApp extends Component<NavigationScreenProps<NavigationState, Navigat
                         <Image style={styles.imageReturn} source={require('./images/exit.png')} />
                     </TouchableOpacity>
                 }
-                
+
                 {
                     (this.props.hiddenBack !== true) &&
                     <TouchableOpacity onPress={this.redirectBack}>

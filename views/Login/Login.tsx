@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, Text, View, CheckBox, Image, Alert } from 'react-native'
+import { SafeAreaView, Text, View, CheckBox, Image, Alert, AsyncStorage, Keyboard } from 'react-native'
 import { NavigationScreenProps, NavigationState, NavigationParams } from 'react-navigation'
 import RNLocation, { Location } from 'react-native-location'
 import device from 'react-native-device-info'
@@ -8,7 +8,7 @@ import { Login as styles } from '../styles'
 import Input from '../../components/Input/Input'
 import { Button, WhiteSpace, NoticeBar } from '@ant-design/react-native'
 import HiddenBar from '../../components/HiddenBar/HiddenBar'
-import { urlServer } from '../util'
+import { urlServer, sendError } from '../util'
 import Loader from '../../components/Loader/Loader'
 import { RFValue } from 'react-native-responsive-fontsize'
 import validator from 'validator'
@@ -57,7 +57,18 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
 
         const { deviceInfo } = this.state
 
-        device.getBrand().then(
+        const credentials: string | null = await AsyncStorage.getItem('credentials')
+
+        if(credentials) {
+            const { email, password } = JSON.parse(credentials)
+    
+            this.setState({ email, password })
+
+        }
+
+
+
+        await device.getBrand().then(
             (brand: string) => this.setState({
                 deviceInfo: {
                     ...deviceInfo,
@@ -66,7 +77,7 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
             })
         )
 
-        device.getModel().then(
+        await device.getModel().then(
             (model: string) => this.setState({
                 deviceInfo: {
                     ...deviceInfo,
@@ -75,7 +86,7 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
             })
         )
 
-        device.getMacAddress().then(
+        await device.getMacAddress().then(
             (mac: string) => this.setState({
                 deviceInfo: {
                     ...deviceInfo,
@@ -84,11 +95,11 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
             })
         )
 
-        RNLocation.configure({
+        await RNLocation.configure({
             distanceFilter: 0.5
         })
 
-        RNLocation.requestPermission({
+        await RNLocation.requestPermission({
             ios: "whenInUse",
             android: {
                 detail: "coarse"
@@ -131,20 +142,46 @@ class Login extends Component<NavigationScreenProps<NavigationState, NavigationP
     }
 
     /**Method login button press in view */
-    tryLogin = () => {
+    tryLogin = async () => {
+        Keyboard.dismiss()
+
         this.setState({ loader: true })
 
         const { email, password, deviceInfo } = this.state
 
         // Validate data login
         if (validator.isEmail(email) && !validator.isEmpty(password)) {
-            Axios.post(`${urlServer}/login`, { email, password, deviceInfo, mobile: true }).then(
-                (data: AxiosResponse) => {
-                    console.log(data.status)
-                    if (data.data.error || data.status === 401) {
-                        this.setState({ loginFailed: true })
-                    }
+            if (this.state.remember) {
+                try {
+                    const { email, password } = this.state
 
+                    const credentials = JSON.stringify({ email, password })
+
+                    await AsyncStorage.setItem('credentials', credentials)
+                } catch (error) {
+                    sendError(error)
+                }
+            }
+
+
+            Axios.post(`${urlServer}/login`, { email, password, deviceInfo, mobile: true }).then(
+                async (data: AxiosResponse) => {
+                    if (data.data.error || data.status === 401) {
+                        this.setState({ loginFailed: true, password: '' })
+                    } else {
+                        try {
+                            const { navigation } = this.props
+
+                            // Set token in Local Storage
+                            await AsyncStorage.setItem('token', data.data.token)
+
+                            // @ts-ignore
+                            navigation.dispatch(navigation.navigate({ routeName: this.state.hosteler ? 'MenuHostelier' : 'Index' }))
+
+                        } catch (error) {
+                            sendError('Error al set token - Login.tsx `tryLogin()`')
+                        }
+                    }
                     // Login Succesfull
                     // this.props.navigation.navigate({ routeName: 'MenuHostelier' })
                 }
